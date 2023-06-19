@@ -7,26 +7,49 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
+  ListRenderItem,
+  ListRenderItemInfo,
 } from 'react-native';
 
 import {globalStyles} from '../GlobalStyles';
+import {globalColours} from '../GlobalColours';
+import {DetailsScreenModal, DrinkDetailsProps} from './DetailsScreenModal';
 
-export const DrinksListScreen = props => {
+interface IDrinksListScreenProps {
+  screenTitle: string;
+  drinksList: DrinkDetailsProps[];
+}
+
+export const DrinksListScreen = (props: IDrinksListScreenProps) => {
+
   const {screenTitle, drinksList} = props;
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedDrink, setSelectedDrink] = useState({});
 
-  const viewDetails = drink => {
-    setSelectedDrink(drink);
-    console.log('Selected drink: ', drink);
-    // TODO Create modal screen to display details
+  const openModal = () => {
+    setIsModalVisible(true);
   };
 
-  const renderListItem = drink => {
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const viewDetails = (drink: DrinkDetailsProps) => {
+    // Set the drink details for the modal screen to display
+    console.log('Selected drink: ', drink);
+    setSelectedDrink(drink);
+    openModal();
+  };
+
+  const renderListItem = (drinkInfo: ListRenderItemInfo<DrinkDetailsProps>) => {
+
+    const drink = drinkInfo.item;
+
     return (
       <View style={styles.listItem}>
         <Pressable
           onPress={() => {
-            viewDetails(drink.item);
+            viewDetails(drink);
           }}
           style={({pressed}) => {
             return [
@@ -36,21 +59,19 @@ export const DrinksListScreen = props => {
           }}>
           <View style={styles.rowView}>
             <View style={styles.nameView}>
-              <Text style={globalStyles.buttonUnselectedText}>
-                {drink.item.name}
-              </Text>
+              <Text style={styles.listItemButtonText}>{drink.name}</Text>
             </View>
             <View style={styles.descriptionView}>
               <Text
                 ellipsizeMode="tail"
                 numberOfLines={1}
                 style={styles.descriptionText}>
-                {drink.item.description}
+                {drink.description}
               </Text>
             </View>
             <View style={styles.imageView}>
               <Image
-                source={{uri: drink.item.image_url}}
+                source={{uri: drink.image_url}}
                 style={styles.image}
               />
             </View>
@@ -72,6 +93,12 @@ export const DrinksListScreen = props => {
           renderItem={renderListItem}
         />
       </View>
+
+      <DetailsScreenModal
+        visible={isModalVisible}
+        content={selectedDrink}
+        closeModal={closeModal}
+      />
     </SafeAreaView>
   );
 };
@@ -129,5 +156,12 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: 'grey',
     padding: 2,
+  },
+  listItemButtonText: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: globalColours.DarkGrey,
+    paddingLeft: 5,
+    paddingRight: 5,
   },
 });

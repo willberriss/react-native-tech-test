@@ -9,16 +9,33 @@ import {NavigationContainer} from '@react-navigation/native';
 import {DrinksListScreen} from './screens/DrinksListScreen';
 import {globalStyles} from './GlobalStyles';
 
+import {DrinkDetailsProps} from './screens/DetailsScreenModal';
+
+/*
+type DrinkDetailsProps = {
+  name: string;
+  tagline: string;
+  description: string;
+  image_url: string;
+  abv: string;
+  ph: string;
+};
+*/
+
 const requestDrinksList = async () => {
-  const drinks = [];
+
+  const drinks: DrinkDetailsProps[] = [];
 
   for (let c = 1; c < 11; c++) {
     const response = await fetch(`https://api.punkapi.com/v2/beers/${c}`);
     const data = await response.json();
-    const drink = {
+    const drink: DrinkDetailsProps = {
       name: `${data[0].name}`,
+      tagline: `${data[0].tagline}`,
       description: `${data[0].description}`,
       image_url: `${data[0].image_url}`,
+      abv: `${data[0].abv}`,
+      ph: `${data[0].ph}`,
     };
     drinks.push(drink);
   }
@@ -26,12 +43,12 @@ const requestDrinksList = async () => {
 };
 
 const App = (): JSX.Element => {
-  const [drinksList, setDrinksList] = useState([]);
+  const [drinksList, setDrinksList] = useState<DrinkDetailsProps[]>([]);
 
   useEffect(() => {
     (async () => {
-      const drinks = await requestDrinksList();
-      setDrinksList(drinks);
+      const drinksList: DrinkDetailsProps[] = await requestDrinksList();
+      setDrinksList(drinksList);
     })();
     return () => {
       /* called when component unmounts */

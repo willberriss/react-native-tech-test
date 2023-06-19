@@ -108,14 +108,14 @@ export const globalStyles = StyleSheet.create({
     padding: 5,
   },
   buttonUnselectedText: {
-    fontSize: 12,
+    fontSize: 20,
     textAlign: 'center',
     color: globalColours.DarkGrey,
     paddingLeft: 5,
     paddingRight: 5,
   },
   buttonSelectedText: {
-    fontSize: 12,
+    fontSize: 20,
     textAlign: 'center',
     color: 'white',
     paddingLeft: 5,
