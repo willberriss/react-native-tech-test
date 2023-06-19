@@ -31,7 +31,6 @@ const dummyDetails: DrinkDetailsProps = {
 export const DrinksListScreen = (props: IDrinksListScreenProps) => {
   const {screenTitle, drinksList} = props;
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  //const [selectedDrink, setSelectedDrink] = useState({});
   const [selectedDrink, setSelectedDrink] =
     useState<DrinkDetailsProps>(dummyDetails);
 
@@ -45,7 +44,6 @@ export const DrinksListScreen = (props: IDrinksListScreenProps) => {
 
   const viewDetails = (drink: DrinkDetailsProps) => {
     // Set the drink details for the modal screen to display
-    console.log('Selected drink: ', drink);
     setSelectedDrink(drink);
     openModal();
   };
