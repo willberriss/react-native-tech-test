@@ -11,17 +11,6 @@ import {globalStyles} from './GlobalStyles';
 
 import {DrinkDetailsProps} from './screens/DetailsScreenModal';
 
-/*
-type DrinkDetailsProps = {
-  name: string;
-  tagline: string;
-  description: string;
-  image_url: string;
-  abv: string;
-  ph: string;
-};
-*/
-
 const requestDrinksList = async () => {
 
   const drinks: DrinkDetailsProps[] = [];

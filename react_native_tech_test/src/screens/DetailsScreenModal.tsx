@@ -19,8 +19,15 @@ export type DrinkDetailsProps = {
   ph: string;
 };
 
-//export const DetailsScreenModal: FC<DetailsScreenModalProps> = props => {
-export const DetailsScreenModal: FC<any> = props => {
+interface IDetailsScreenProps {
+  content: DrinkDetailsProps;
+  visible: boolean;
+  closeModal: () => void;
+};
+
+//export const DrinksListScreen = (props: IDrinksListScreenProps) => {
+export const DetailsScreenModal: FC<IDetailsScreenProps> = props => {
+//export const DetailsScreenModal: FC<any> = props => {
   const {content, visible, closeModal} = props;
 
   return (

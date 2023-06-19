@@ -18,13 +18,23 @@ import {DetailsScreenModal, DrinkDetailsProps} from './DetailsScreenModal';
 interface IDrinksListScreenProps {
   screenTitle: string;
   drinksList: DrinkDetailsProps[];
-}
+};
+
+const dummyDetails: DrinkDetailsProps = {
+  name: "myname",
+  tagline: "mytagline",
+  description: "mydescription",
+  image_url: "myimage_url",
+  abv: "myabv",
+  ph: "myph",
+};
 
 export const DrinksListScreen = (props: IDrinksListScreenProps) => {
 
   const {screenTitle, drinksList} = props;
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [selectedDrink, setSelectedDrink] = useState({});
+  //const [selectedDrink, setSelectedDrink] = useState({});
+  const [selectedDrink, setSelectedDrink] = useState<DrinkDetailsProps>(dummyDetails);
 
   const openModal = () => {
     setIsModalVisible(true);
