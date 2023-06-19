@@ -12,7 +12,6 @@ import {globalStyles} from './GlobalStyles';
 import {DrinkDetailsProps} from './screens/DetailsScreenModal';
 
 const requestDrinksList = async () => {
-
   const drinks: DrinkDetailsProps[] = [];
 
   for (let c = 1; c < 11; c++) {
@@ -36,8 +35,8 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
-      const drinksList: DrinkDetailsProps[] = await requestDrinksList();
-      setDrinksList(drinksList);
+      const drinks: DrinkDetailsProps[] = await requestDrinksList();
+      setDrinksList(drinks);
     })();
     return () => {
       /* called when component unmounts */
