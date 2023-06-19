@@ -33,13 +33,13 @@ npx prettier --write src
 # 4. Run eslint
 
 ```bash
-npx eslint --ext .tsx src
+npm run lint
 ```
 
-or to run the script alias "lint" in package.json
+or 
 
 ```bash
-npm run lint
+npx eslint --ext .tsx src
 ```
 
 # 5. Run the TypeScript compiler
